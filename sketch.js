@@ -4,6 +4,7 @@ var num_ca;
 var num_sf;
 var table;
 var years;
+var rect_length = 0;
 var barWidth = 20;
 var barMargin = 10;
 function preload(){
@@ -24,10 +25,11 @@ function draw() {
   textSize(32);
   //textAlign(CENTER);
   fill('#F6F6E9');
+  textFont('Impact');
   text("Real Gross Rent History for US, California and San Francisco, 2005-2015",100,100);
   fill('#F6F6E9');
   textSize(20);
-  text("US Median",200,600);
+  text("US Median",150,600);
   text("California",550,600);
   text("San Francisco",950,600);
   for (var e = 0; e < num_us.length;e++) {
@@ -35,7 +37,12 @@ function draw() {
     fill("#E8FFC1");
     noStroke();
     translate(50,90);
-    rect(50,90+e*(barWidth+barMargin),num_us[e]/5,barWidth);
+    if (rect_length<num_us[e]/5){
+      console.log(num_us[e]/5);
+      rect_length += 2;
+      rect(50,90+e*(barWidth+barMargin),rect_length,barWidth);
+    }
+    
     fill("#D7EEF2");
     textSize(15);
     text(years[e],250,90+e*(barWidth+barMargin)+barWidth/2);
@@ -79,4 +86,10 @@ function loadData(){
   }
 
 }
+function mousemove(){ 
+
+
+}
+
+
 
