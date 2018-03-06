@@ -5,6 +5,8 @@ var num_sf;
 var table;
 var years;
 var rect_length = 0;
+var rect_length1 = 0;
+var rect_length2 = 0;
 var barWidth = 20;
 var barMargin = 10;
 function preload(){
@@ -14,19 +16,20 @@ function setup() {
   // put setup code here
   createCanvas(windowWidth, windowHeight);
   noStroke();
-  noLoop();  
+  //noLoop();  
   loadData();
+  frameRate(40);
 
 }
 
 function draw() {
   // put drawing code here
   background('#283149');
-  textSize(32);
+  textSize(28);
   //textAlign(CENTER);
   fill('#F6F6E9');
   textFont('Impact');
-  text("Real Gross Rent History for US, California and San Francisco, 2005-2015",100,100);
+  text("Real Gross Rent History for US, California and San Francisco, 2005-2015",200,100);
   fill('#F6F6E9');
   textSize(20);
   text("US Median",150,600);
@@ -38,9 +41,10 @@ function draw() {
     noStroke();
     translate(50,90);
     if (rect_length<num_us[e]/5){
-      console.log(num_us[e]/5);
-      rect_length += 2;
+      rect_length += 1;
       rect(50,90+e*(barWidth+barMargin),rect_length,barWidth);
+    }else{
+      rect(50,90+e*(barWidth+barMargin),num_us[e]/5,barWidth);
     }
     
     fill("#D7EEF2");
@@ -52,7 +56,13 @@ function draw() {
     push();
     fill("#A5ECD7");
     translate(230,90);
-    rect(230,90+a*(barWidth+barMargin),num_ca[a]/5,barWidth);
+    if (rect_length1<num_ca[a]/5){
+      rect_length1 += 1;
+      rect(230,90+a*(barWidth+barMargin),rect_length1,barWidth);
+    }else{
+      rect(230,90+a*(barWidth+barMargin),num_ca[a]/5,barWidth);
+    }
+
     fill("#D7EEF2");
     textSize(15);
     text(years[a],500,90+a*(barWidth+barMargin)+barWidth/2);
@@ -62,7 +72,13 @@ function draw() {
     push();
     fill("#51ADCF");
     translate(420,90);
-    rect(420,90+b*(barWidth+barMargin),num_sf[b]/5,barWidth);
+    if (rect_length2<num_sf[b]/5){
+      rect_length2 += 1;
+      rect(420,90+b*(barWidth+barMargin),rect_length2,barWidth);
+    }else{
+      rect(420,90+b*(barWidth+barMargin),num_sf[b]/5,barWidth);
+    }
+
     fill("#D7EEF2");
     textSize(15);
     text(years[b],750,90+b*(barWidth+barMargin)+barWidth/2);
@@ -84,12 +100,5 @@ function loadData(){
     years[i] = row.get("year");
     
   }
-
 }
-function mousemove(){ 
-
-
-}
-
-
 
